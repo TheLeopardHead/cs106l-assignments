@@ -43,6 +43,7 @@ __pycache__/
 # http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
 .Python
 [Bb]in
+[Bb]uild/
 #[Ii]nclude
 [Ll]ib
 [Ll]ib64
@@ -51,3 +52,5 @@ __pycache__/
 pyvenv.cfg
 .venv
 pip-selfcheck.json
+
+*/student_output/

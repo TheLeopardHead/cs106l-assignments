@@ -54,3 +54,4 @@ pyvenv.cfg
 pip-selfcheck.json
 
 */student_output/
+*/autograder/student_output/

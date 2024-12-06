@@ -7,6 +7,7 @@
  *
  */
 
+#include <sstream>
 #include <fstream>
 #include <iostream>
 #include <queue>
@@ -16,7 +17,7 @@
 
 #include "utils.h"
 
-std::string kYourName = "STUDENT TODO"; // Don't forget to change this!
+std::string kYourName = "Enzo Tang"; // Don't forget to change this!
 
 /**
  * Takes in a file name and returns a set containing all of the applicant names as a set.
@@ -30,7 +31,13 @@ std::string kYourName = "STUDENT TODO"; // Don't forget to change this!
  * to also change the corresponding functions in `utils.h`.
  */
 std::set<std::string> get_applicants(std::string filename) {
-  // STUDENT TODO: Implement this function.
+  std::ifstream file(filename);
+  std::set<std::string> applicants;
+  std::string line;
+  while (std::getline(file, line)) {
+    applicants.insert(line);
+  }
+  return applicants;
 }
 
 /**
@@ -42,7 +49,19 @@ std::set<std::string> get_applicants(std::string filename) {
  * @return          A queue containing pointers to each matching name.
  */
 std::queue<const std::string*> find_matches(std::string name, std::set<std::string>& students) {
-  // STUDENT TODO: Implement this function.
+  std::queue<const std::string*> matches;
+  for(auto& student : students) {
+    std::string student_first;
+    std::string student_last;
+    std::string name_first;
+    std::string name_last;
+    std::istringstream(student) >> student_first >> student_last;
+    std::istringstream(name) >> name_first >> name_last;
+    if(student_first[0] == name_first[0] && student_last[0] == name_last[0]){
+      matches.push(&student);
+    }
+  }
+  return matches;
 }
 
 /**
@@ -56,7 +75,14 @@ std::queue<const std::string*> find_matches(std::string name, std::set<std::stri
  *                Will return "NO MATCHES FOUND." if `matches` is empty.
  */
 std::string get_match(std::queue<const std::string*>& matches) {
-  // STUDENT TODO: Implement this function.
+  std::string match;
+  for(int i = 0; i < matches.size(); i++){
+    if(matches.front()->size() > match.size()){ 
+      match = *matches.front();
+    }
+    matches.pop();
+  }
+  return match;
 }
 
 /* #### Please don't modify this call to the autograder! #### */
